@@ -19,7 +19,16 @@
 
 -----------------------------------------------------------------------------
 -- |
--- A class for semirings (types with two binary operations, one commutative and one associative, and two respective identities), with various general-purpose instances.
+-- Module      :  Data.Semiring
+-- Copyright   :  (C) 2018 chessai
+-- License     :  BSD3 (see the file LICENSE)
+-- Maintainer  :  chessai <chessai1996@gmail.com>
+-- Stability   :  provisional
+-- Portability :  portable
+--
+-- A class for semirings: types with two binary operations, one commutative
+-- and one associative, and two respective identities, with general-purpose
+-- instances.
 --
 -----------------------------------------------------------------------------
 
@@ -82,6 +91,7 @@ import           Data.HashSet (HashSet)
 import qualified Data.HashSet as HashSet
 #endif
 import           Data.Int (Int, Int8, Int16, Int32, Int64)
+import           Data.List (repeat, zipWith)
 import           Data.Maybe (Maybe(..))
 #if MIN_VERSION_base(4,12,0)
 import           Data.Monoid (Ap(..))
@@ -648,6 +658,27 @@ instance Semiring a => Semiring (Const a b) where
 
 instance Ring a => Ring (Const a b) where
   negate (Const x) = Const (negate x)
+  {-# INLINE negate #-}
+
+-- | Pointwise operations, truncated to the shorter list. The identities
+-- and 'fromNatural' produce infinite lists. For finite lists, this instance
+-- does not satisfy the annihilation laws: @times [] zero /= zero@.
+instance Semiring a => Semiring [a] where
+  zero = repeat zero
+  one  = repeat one
+  plus = zipWith plus
+  times = zipWith times
+  fromNatural = repeat . fromNatural
+  {-# INLINE plus  #-}
+  {-# INLINE zero  #-}
+  {-# INLINE times #-}
+  {-# INLINE one   #-}
+  {-# INLINE fromNatural #-}
+
+-- | Pointwise negation. For finite lists, the additive inverse laws fail
+-- because the sum is finite while 'zero' is infinite.
+instance Ring a => Ring [a] where
+  negate = fmap negate
   {-# INLINE negate #-}
 
 -- | This instance can suffer due to floating point arithmetic.

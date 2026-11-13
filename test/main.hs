@@ -164,6 +164,7 @@ namedTests =
   , ("IntMap Max", semiringLaws pIntMapMax)
 
   , ("AB", semiringLaws pAB)
+  , ("List", ringLaws pList)
   ]
 
 #if !(MIN_VERSION_base(4,12,0))
@@ -285,6 +286,9 @@ pAlt = Proxy :: Proxy (Alt Maybe Int)
 pRational = Proxy :: Proxy Rational
 pMod2 = Proxy :: Proxy Mod2
 pAB = Proxy :: Proxy AB
+
+pList :: Proxy [Int]
+pList = Proxy
 
 pIntSetSum = Proxy :: Proxy (IntSetOf (Sum Int))
 pIntSetProduct = Proxy :: Proxy (IntSetOf (Product Int))

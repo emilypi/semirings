@@ -1,3 +1,11 @@
+Unreleased
+----------
+* Add pointwise `Semiring` and `Ring` instances for lists. Operations truncate
+  to the shorter list; identities and `fromNatural` produce infinite lists.
+  Finite lists do not satisfy annihilation or additive inverse laws.
+* Allow containers 0.7/0.8, hashable 1.4/1.5, and base-compat-batteries 0.15.
+* Fix test compilation with QuickCheck 2.17 and later.
+
 0.7: [2021-07-09]
 -----------------
 * Add `Semiring` instance for `Ordering`
