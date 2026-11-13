@@ -36,10 +36,12 @@ tested-with:   GHC == 7.10.3
              , GHC == 8.6.5
              , GHC == 8.8.4
              , GHC == 8.10.2
+             , GHC == 9.2.8
+             , GHC == 9.14.1
 
 source-repository head
   type: git
-  location: git://github.com/chessai/semirings.git
+  location: https://github.com/chessai/semirings.git
 
 flag containers
   description:
@@ -63,7 +65,7 @@ library
 
   build-depends:
       base >= 4.8 && < 5
-    , base-compat-batteries
+    , base-compat-batteries >= 0.10 && < 0.16
   exposed-modules:
     Data.Euclidean
     Data.Field
@@ -73,12 +75,12 @@ library
     Data.Semiring.Generic
 
   if impl(ghc < 8.6.1)
-    build-depends: template-haskell >= 2.4.0.0
+    build-depends: template-haskell >= 2.10 && < 2.14
 
   if flag(containers)
-    build-depends: containers >= 0.5.4 && < 0.7
+    build-depends: containers >= 0.5.4 && < 0.9
 
   if flag(unordered-containers)
     build-depends:
-        hashable >= 1.1  && < 1.4
+        hashable >= 1.1  && < 1.6
       , unordered-containers >= 0.2  && < 0.3

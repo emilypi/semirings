@@ -9,6 +9,21 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE StandaloneDeriving #-}
 
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  Main
+-- Copyright   :  (C) 2018 chessai
+-- License     :  BSD3 (see the file LICENSE)
+-- Maintainer  :  chessai <chessai1996@gmail.com>
+-- Stability   :  provisional
+-- Portability :  portable
+--
+-- Law checks for the semiring, ring, and Euclidean instances.
+--
+-----------------------------------------------------------------------------
+
+module Main (main) where
+
 import Control.Monad ((>=>),forM)
 import Control.Applicative (liftA2)
 import Data.Complex
@@ -186,7 +201,9 @@ pPredicate = Proxy :: Proxy (Predicate Int)
 pEquivalence = Proxy :: Proxy (Equivalence Int)
 pOp = Proxy :: Proxy (Op Int Int)
 
+#if !MIN_VERSION_QuickCheck(2,17,0)
 deriving instance Arbitrary a => Arbitrary (Down a)
+#endif
 
 -- | Rationals constrained to being positive
 newtype PosRatio a = PosRatio { getPosRatio :: Ratio a }

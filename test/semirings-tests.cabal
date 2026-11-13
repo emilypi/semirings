@@ -20,6 +20,8 @@ Tested-With:    GHC == 7.10.3
               , GHC == 8.6.5
               , GHC == 8.8.3
               , GHC == 8.10.1
+              , GHC == 9.2.8
+              , GHC == 9.14.1
 
 test-suite test
   Default-Language: Haskell2010
@@ -28,16 +30,16 @@ test-suite test
   type: exitcode-stdio-1.0
   build-depends: base >= 4.8 && < 5
                , QuickCheck
-               , base-compat-batteries
+               , base-compat-batteries >= 0.10 && < 0.16
                , base-orphans
-               , containers
-               , hashable
-               , quickcheck-classes >= 0.6.4.0
+               , containers >= 0.5.4 && < 0.9
+               , hashable >= 1.1 && < 1.6
+               , quickcheck-classes >= 0.6.4.0 && < 0.7
                , quickcheck-instances
-               , semirings
+               , semirings == 0.7
                , tasty
                , tasty-quickcheck
-               , unordered-containers
+               , unordered-containers >= 0.2 && < 0.3
 
 source-repository head
   type:     git

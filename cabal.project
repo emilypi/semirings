@@ -1,4 +1,4 @@
 packages: .
           ./test
-package semirings-test
+package semirings-tests
   ghc-options: -Wall
