@@ -10,3 +10,12 @@ result*
 *.o
 .stack-work
 hie.log
+logs/
+*.log
+.Codex/
+.codex/
+.agents/
+.claude/
+AGENTS.md
+CLAUDE.md
+FOCUS.md
